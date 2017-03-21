@@ -1,0 +1,22 @@
+{
+  "name": "core-me",
+  "version": "0.0.1",
+  "description": "",
+  "main": "*",
+  "scripts": {
+    "test": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kyoloro/core-me.git"
+  },
+  "keywords": [
+    "*"
+  ],
+  "author": "kyo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kyoloro/core-me/issues"
+  },
+  "homepage": "https://github.com/Kyoloro/core-me#readme"
+}
