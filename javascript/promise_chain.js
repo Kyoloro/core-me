@@ -6,6 +6,7 @@ const fs = require('fs')
 // Promise/A 只有一个catch，所以不用考虑闭包带来的问题，只要错误，就会在最新的error_callback中触发
 // Promise/A 链中有多个then，要考虑闭包导致的，最后异步触发指向了同一个函数
 // 在于哨兵变量的使用
+// Promise 入侵性太强了，得注意不同实现是可能存在冲突的
 function promisify(fn) {
 
     return function (path, enc) {
