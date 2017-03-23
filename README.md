@@ -1,1 +1,1 @@
-daily think
+#### Daily thinking
