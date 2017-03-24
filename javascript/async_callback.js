@@ -21,21 +21,40 @@ const _async = (fns) => {
     }
 }
 
-// Async Function
-const fn = (cb) => {
-    setTimeout(() => {
-        cb(null, 1)
-    }, 1000)
+// // Async Function
+// const fn = (cb) => {
+//     setTimeout(() => {
+//         cb(null, 1)
+//     }, 1000)
+// }
+
+// // 封装 实现效果
+// console.time()
+// _async([
+//     fn,
+//     fn
+// ]).then((arr) => {
+//     console.timeEnd() // 1002.782ms
+//     console.log(arr) // [1, 1]
+// })
+
+const fs = require('fs')
+
+const fn_2 = (callback) => {
+    // fs.readFile('./fs_model.txt', 'utf8', (err, content) => {
+    //     callback(null, content)
+    // })
+    process.nextTick(() => {
+        callback(null, '1')
+    })
 }
 
-// 封装 实现效果
-console.time()
 _async([
-    fn,
-    fn
-]).then((arr) => {
-    console.timeEnd() // 1002.782ms
-    console.log(arr) // [1, 1]
+    fn_2,
+    fn_2
+])
+.then(arr => {
+    console.log(arr)
 })
 
 console.log('无同步阻塞')
