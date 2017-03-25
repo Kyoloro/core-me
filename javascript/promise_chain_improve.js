@@ -17,12 +17,14 @@ Deferred.prototype.resolve = function (obj) {
         if (handler && handler.fulfilled) {
             var ret = handler.fulfilled(obj);
             if (ret && ret.isPromise) {
-                ret.queue = promise.queue;
-                // this.promise = ret;
-                return;
+                ret.queue = ret.queue.concat(promise.queue);
+                this.promise = ret;
+            } else {
+                ret = Promise.resolve(ret)
+                ret.queue = ret.queue.concat(promise.queue);
             }
+            return ;
         }
-        // console.log(1)
     }
 };
 
@@ -35,7 +37,7 @@ Deferred.prototype.reject = function (err) {
             var ret = handler.error(err);
             if (ret && ret.isPromise) {
                 ret.queue = promise.queue;
-                // this.promise = ret;
+                this.promise = ret;
                 return;
             }
         }
@@ -104,7 +106,13 @@ var sleepAsync = function (time) {
 Promise.resolve(1)
     .then((content) => {
         console.log(content)
-        return readFileAsync('./fs_model.txt', 'utf8')
+        return sleepAsync(300).then(() => {
+            console.log('123')
+            return readFileAsync('./fs_model.txt', 'utf8').then((c) => {
+                console.log('123')
+                return 'fsdf'
+            }) 
+        })
     })
     .then((content) => {
         console.log(content)
@@ -112,7 +120,7 @@ Promise.resolve(1)
     })
     .then((content) => {
         console.log(content)
-        return sleepAsync(5000)
+        return sleepAsync(300)
     })
     .then((content) => {
         console.log(content)
