@@ -16,6 +16,7 @@ Deferred.prototype.resolve = function (obj) {
             } else {
                 ret = Promise.resolve(ret)
                 ret.queue = ret.queue.concat(promise.queue);
+                this.promise = ret;
             }
             return;
         }
